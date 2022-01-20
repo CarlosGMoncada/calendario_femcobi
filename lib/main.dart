@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import '../models/calendar.dart';
+import '../models/models.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:table_calendar/table_calendar.dart';
-import '../utils.dart';
+//import 'package:table_calendar/table_calendar.dart';
 
 void main() {
   initializeDateFormatting().then((_) => runApp(const MyApp()));
@@ -21,13 +20,4 @@ class MyApp extends StatelessWidget {
       home: const MyHomePage(title: 'Calendario FEMCOBI 2022'),
     );
   }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _TableEventsExampleState createState() => _TableEventsExampleState();
 }

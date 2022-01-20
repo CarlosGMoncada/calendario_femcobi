@@ -1,3 +1,16 @@
+import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
+import '../utils.dart';
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _TableEventsExampleState createState() => _TableEventsExampleState();
+}
+
 class _TableEventsExampleState extends State<MyHomePage> {
   late final ValueNotifier<List<Event>> _selectedEvents;
   CalendarFormat _calendarFormat = CalendarFormat.month;
