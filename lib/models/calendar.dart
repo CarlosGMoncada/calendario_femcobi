@@ -3,10 +3,8 @@ import 'package:table_calendar/table_calendar.dart';
 import '../utils.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
+  const MyHomePage({Key? key, required this.currentmonth}) : super(key: key);
+  final int currentmonth;
   @override
   _TableEventsExampleState createState() => _TableEventsExampleState();
 }
@@ -17,16 +15,19 @@ class _TableEventsExampleState extends State<MyHomePage> {
   RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
       .toggledOff; // Can be toggled on/off by longpressing a date
   DateTime _focusedDay = DateTime.now();
+  // DateTime _focusedDay = DateTime(kToday.year, widget.currentmonth, 1);
   DateTime? _selectedDay;
   DateTime? _rangeStart;
   DateTime? _rangeEnd;
+  int? imageindex;
 
   @override
   void initState() {
     super.initState();
-
+    // DateTime _focusedDay = DateTime(kToday.year, widget.currentmonth, 1);
     _selectedDay = _focusedDay;
     _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
+    imageindex = _focusedDay.month;
   }
 
   @override
@@ -97,14 +98,14 @@ class _TableEventsExampleState extends State<MyHomePage> {
                 width: 500,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/Asset_1.jpg'),
+                    image: AssetImage(monthlybackground(imageindex)),
                     fit: BoxFit.fitHeight,
                   ),
                 ),
               ),
               TableCalendar<Event>(
-                firstDay: kFirstDay,
-                lastDay: kLastDay,
+                firstDay: DateTime.utc(2022, 1, 1),
+                lastDay: DateTime.utc(2022, 12, 31),
                 focusedDay: _focusedDay,
                 selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
                 rangeStartDay: _rangeStart,
@@ -128,6 +129,9 @@ class _TableEventsExampleState extends State<MyHomePage> {
                 },
                 onPageChanged: (focusedDay) {
                   _focusedDay = focusedDay;
+                  setState(() {
+                    imageindex = focusedDay.month;
+                  });
                 },
               ),
             ],
@@ -162,5 +166,62 @@ class _TableEventsExampleState extends State<MyHomePage> {
         ],
       ),
     );
+  }
+}
+
+monthlybackground(value) {
+  switch (value) {
+    case DateTime.january:
+      {
+        return 'assets/octopus.jpg';
+      }
+    case DateTime.february:
+      {
+        return 'assets/ladybugs.jpg';
+      }
+    case 3:
+      {
+        return 'assets/flower.jpg';
+      }
+    case 4:
+      {
+        return 'assets/fantasy.jpg';
+      }
+    case 5:
+      {
+        return 'assets/feather.jpg';
+      }
+    case 6:
+      {
+        return 'assets/tree.jpg';
+      }
+    case 7:
+      {
+        return 'assets/ape.jpg';
+      }
+    case 8:
+      {
+        return 'assets/fly.jpg';
+      }
+    case 9:
+      {
+        return 'assets/lumber.jpg';
+      }
+    case 10:
+      {
+        return 'assets/spider.jpg';
+      }
+    case 11:
+      {
+        return 'assets/drop.jpg';
+      }
+    case 12:
+      {
+        return 'assets/abstract.jpg';
+      }
+    default:
+      {
+        return 'assets/coronavirus-4952102.jpg';
+      }
   }
 }
