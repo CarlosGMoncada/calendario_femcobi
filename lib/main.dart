@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themedark = ThemeData.dark();
+    final themedark = ThemeData.light();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: themedark,
@@ -34,19 +34,18 @@ class FirstRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const int jan = 2;
+    // const int jan = 2;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Calendario FEMCOBI 2022'),
+        title: const Text('Federación Mexicana de Colegios de Biólogos A.C.'),
       ),
       body: Center(
         child: ElevatedButton(
-          child: const Text('Enero'),
+          child: const Text('Calendario'),
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => const MyHomePage(currentmonth: jan)),
+              MaterialPageRoute(builder: (context) => const MyHomePage()),
             );
           },
         ),

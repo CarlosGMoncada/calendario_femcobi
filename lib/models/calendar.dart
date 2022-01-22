@@ -3,8 +3,7 @@ import 'package:table_calendar/table_calendar.dart';
 import '../utils.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.currentmonth}) : super(key: key);
-  final int currentmonth;
+  const MyHomePage({Key? key}) : super(key: key);
   @override
   _TableEventsExampleState createState() => _TableEventsExampleState();
 }
@@ -15,7 +14,6 @@ class _TableEventsExampleState extends State<MyHomePage> {
   RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
       .toggledOff; // Can be toggled on/off by longpressing a date
   DateTime _focusedDay = DateTime.now();
-  // DateTime _focusedDay = DateTime(kToday.year, widget.currentmonth, 1);
   DateTime? _selectedDay;
   DateTime? _rangeStart;
   DateTime? _rangeEnd;
@@ -24,7 +22,6 @@ class _TableEventsExampleState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    // DateTime _focusedDay = DateTime(kToday.year, widget.currentmonth, 1);
     _selectedDay = _focusedDay;
     _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
     imageindex = _focusedDay.month;
