@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
 import '../models/models.dart';
 import 'package:intl/date_symbol_data_local.dart';
-//import 'package:table_calendar/table_calendar.dart';
 
 void main() {
   initializeDateFormatting().then((_) => runApp(const MyApp()));
 }
-// void main() {
-//   runApp(const MaterialApp(
-//     title: 'Navigation Basics',
-//     home: FirstRoute(),
-//   ));
-// }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -20,10 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final themedark = ThemeData.light();
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Calendario FEMCOBI 2022',
       theme: themedark,
       //primarySwatch: Colors.red,
-      //home: const MyHomePage(title: 'Calendario FEMCOBI 2022'),
       home: const FirstRoute(),
     );
   }
@@ -34,13 +26,29 @@ class FirstRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // const int jan = 2;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Federación Mexicana de Colegios de Biólogos A.C.'),
-      ),
-      body: Center(
-        child: ElevatedButton(
+        // appBar: AppBar(
+        //   title: const Text('Calendario FEMCOBI 2022'),
+        // ),
+        body: Center(
+      child: Column(children: [
+        Stack(children: [
+          Image.asset(
+            'assets/bee.jpg',
+            width: double.infinity,
+            // fit: BoxFit.cover,
+          ),
+          Center(
+            child: Text('Calendario FEMCOBI 2022'),
+          ),
+        ]),
+        Container(
+            padding: EdgeInsets.all(10.0),
+            child: Image.asset(
+              'assets/logos/logo_FEMCOBI.png',
+              // width: 200,
+            )),
+        ElevatedButton(
           child: const Text('Calendario'),
           onPressed: () {
             Navigator.push(
@@ -49,28 +57,16 @@ class FirstRoute extends StatelessWidget {
             );
           },
         ),
-      ),
-    );
-  }
-}
-
-class SecondRoute extends StatelessWidget {
-  const SecondRoute({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Second Route'),
-      ),
-      body: Center(
-        child: ElevatedButton(
+        ElevatedButton(
+          child: const Text('Agradecimientos'),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SecondRoute()),
+            );
           },
-          child: const Text('Go back!'),
         ),
-      ),
-    );
+      ]),
+    ));
   }
 }

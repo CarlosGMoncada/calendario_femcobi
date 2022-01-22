@@ -238,3 +238,117 @@ List<DateTime> daysInRange(DateTime first, DateTime last) {
 final kToday = DateTime.now();
 final kFirstDay = DateTime(kToday.year, kToday.month - 3, kToday.day);
 final kLastDay = DateTime(kToday.year, kToday.month + 3, kToday.day);
+
+monthlybackground(value) {
+  switch (value) {
+    case DateTime.january:
+      {
+        return 'assets/octopus.jpg';
+      }
+    case DateTime.february:
+      {
+        return 'assets/ladybugs.jpg';
+      }
+    case 3:
+      {
+        return 'assets/flower.jpg';
+      }
+    case 4:
+      {
+        return 'assets/fantasy.jpg';
+      }
+    case 5:
+      {
+        return 'assets/feather.jpg';
+      }
+    case 6:
+      {
+        return 'assets/tree.jpg';
+      }
+    case 7:
+      {
+        return 'assets/ape.jpg';
+      }
+    case 8:
+      {
+        return 'assets/fly.jpg';
+      }
+    case 9:
+      {
+        return 'assets/lumber.jpg';
+      }
+    case 10:
+      {
+        return 'assets/spider.jpg';
+      }
+    case 11:
+      {
+        return 'assets/drop.jpg';
+      }
+    case 12:
+      {
+        return 'assets/abstract.jpg';
+      }
+    default:
+      {
+        return 'assets/coronavirus-4952102.jpg';
+      }
+  }
+}
+
+monthlymessage(value) {
+  switch (value) {
+    case DateTime.january:
+      {
+        return 'Por la transición del Homo sapiens al Homini naturae';
+      }
+    case DateTime.february:
+      {
+        return 'Nada en la naturaleza vive para sí mismo, vivir para el otro es la regla de la naturaleza';
+      }
+    case 3:
+      {
+        return 'Resiliencia de frente al cambio';
+      }
+    case 4:
+      {
+        return 'Todo en la naturaleza está vivo e influye en tus pensamientos';
+      }
+    case 5:
+      {
+        return 'Be duces congnitionis et observantiae';
+      }
+    case 6:
+      {
+        return 'En el interior de la naturaleza habita la verdad';
+      }
+    case 7:
+      {
+        return 'Por el trabajo a favor del ejercicio profesional de las ciencias biológicas';
+      }
+    case 8:
+      {
+        return 'Si permaneces cerca de la naturaleza, inesperadamente puede volverse grandiosa e inconmensurable';
+      }
+    case 9:
+      {
+        return 'Por la armonía entre Sociedad y Naturaleza';
+      }
+    case 10:
+      {
+        return 'Evitemos la sexta extinción masiva; con nuestros conocimientos, fortaleza y unión podemos lograr el cambio.';
+      }
+    case 11:
+      {
+        return 'Una hoja solitaria baila en la brisa, testimonio de la libertad de la naturaleza';
+      }
+    case 12:
+      {
+        return 'Cuando observas el cielo nocturno, no eres tú viendo el universo, sino el universo viéndose a sí mismo en forma humana';
+      }
+    default:
+      {
+        return 'Todo en la naturaleza está vivo e influye en tus pensamientos, te des cuenta o no. ¿Quién puede decir que la roca no escucha tus pensamientos? ¿O el río? ¿O las cadenas montañosas? Todos pertenecemos a este mundo viviente y no hay nada que no sea parte de él';
+      }
+  }
+}

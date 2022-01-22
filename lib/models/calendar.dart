@@ -88,137 +88,87 @@ class _TableEventsExampleState extends State<MyHomePage> {
       ),
       body: Column(
         children: [
-          Stack(
-            children: [
-              Container(
-                height: 400,
-                width: 500,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(monthlybackground(imageindex)),
-                    fit: BoxFit.fitHeight,
+          TableCalendar<Event>(
+            firstDay: DateTime.utc(2022, 1, 1),
+            lastDay: DateTime.utc(2022, 12, 31),
+            focusedDay: _focusedDay,
+            selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+            rangeStartDay: _rangeStart,
+            rangeEndDay: _rangeEnd,
+            calendarFormat: _calendarFormat,
+            rangeSelectionMode: _rangeSelectionMode,
+            eventLoader: _getEventsForDay,
+            startingDayOfWeek: StartingDayOfWeek.monday,
+            calendarStyle: CalendarStyle(
+              // Use `CalendarStyle` to customize the UI
+              outsideDaysVisible: false,
+            ),
+            onDaySelected: _onDaySelected,
+            onRangeSelected: _onRangeSelected,
+            onFormatChanged: (format) {
+              if (_calendarFormat != format) {
+                setState(() {
+                  _calendarFormat = format;
+                });
+              }
+            },
+            onPageChanged: (focusedDay) {
+              _focusedDay = focusedDay;
+              setState(() {
+                imageindex = focusedDay.month;
+              });
+            },
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10.0),
+            child: Text(
+              monthlymessage(imageindex),
+              textAlign: TextAlign.left,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          Expanded(
+            child: Stack(
+              children: [
+                Container(
+                  height: double.infinity,
+                  width: 500,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(monthlybackground(imageindex)),
+                      fit: BoxFit.fitHeight,
+                    ),
                   ),
                 ),
-              ),
-              TableCalendar<Event>(
-                firstDay: DateTime.utc(2022, 1, 1),
-                lastDay: DateTime.utc(2022, 12, 31),
-                focusedDay: _focusedDay,
-                selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-                rangeStartDay: _rangeStart,
-                rangeEndDay: _rangeEnd,
-                calendarFormat: _calendarFormat,
-                rangeSelectionMode: _rangeSelectionMode,
-                eventLoader: _getEventsForDay,
-                startingDayOfWeek: StartingDayOfWeek.monday,
-                calendarStyle: CalendarStyle(
-                  // Use `CalendarStyle` to customize the UI
-                  outsideDaysVisible: false,
-                ),
-                onDaySelected: _onDaySelected,
-                onRangeSelected: _onRangeSelected,
-                onFormatChanged: (format) {
-                  if (_calendarFormat != format) {
-                    setState(() {
-                      _calendarFormat = format;
-                    });
-                  }
-                },
-                onPageChanged: (focusedDay) {
-                  _focusedDay = focusedDay;
-                  setState(() {
-                    imageindex = focusedDay.month;
-                  });
-                },
-              ),
-            ],
-          ),
-          const SizedBox(height: 8.0),
-          Expanded(
-            child: ValueListenableBuilder<List<Event>>(
-              valueListenable: _selectedEvents,
-              builder: (context, value, _) {
-                return ListView.builder(
-                  itemCount: value.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 12.0,
-                        vertical: 4.0,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      child: ListTile(
-                        onTap: () => print('${value[index]}'),
-                        title: Text('${value[index]}'),
-                      ),
+                ValueListenableBuilder<List<Event>>(
+                  valueListenable: _selectedEvents,
+                  builder: (context, value, _) {
+                    return ListView.builder(
+                      itemCount: value.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 12.0,
+                            vertical: 4.0,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child: ListTile(
+                            onTap: () => print('${value[index]}'),
+                            title: Text('${value[index]}'),
+                          ),
+                        );
+                      },
                     );
                   },
-                );
-              },
+                ),
+              ],
             ),
           ),
         ],
       ),
     );
-  }
-}
-
-monthlybackground(value) {
-  switch (value) {
-    case DateTime.january:
-      {
-        return 'assets/octopus.jpg';
-      }
-    case DateTime.february:
-      {
-        return 'assets/ladybugs.jpg';
-      }
-    case 3:
-      {
-        return 'assets/flower.jpg';
-      }
-    case 4:
-      {
-        return 'assets/fantasy.jpg';
-      }
-    case 5:
-      {
-        return 'assets/feather.jpg';
-      }
-    case 6:
-      {
-        return 'assets/tree.jpg';
-      }
-    case 7:
-      {
-        return 'assets/ape.jpg';
-      }
-    case 8:
-      {
-        return 'assets/fly.jpg';
-      }
-    case 9:
-      {
-        return 'assets/lumber.jpg';
-      }
-    case 10:
-      {
-        return 'assets/spider.jpg';
-      }
-    case 11:
-      {
-        return 'assets/drop.jpg';
-      }
-    case 12:
-      {
-        return 'assets/abstract.jpg';
-      }
-    default:
-      {
-        return 'assets/coronavirus-4952102.jpg';
-      }
   }
 }
