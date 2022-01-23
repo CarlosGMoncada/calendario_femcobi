@@ -120,7 +120,7 @@ class _TableEventsExampleState extends State<MyHomePage> {
             },
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10.0),
+            padding: EdgeInsets.all(10.0),
             child: Text(
               monthlymessage(imageindex),
               textAlign: TextAlign.left,
