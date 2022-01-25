@@ -243,23 +243,23 @@ monthlybackground(value) {
   switch (value) {
     case DateTime.january:
       {
-        return 'assets/octopus.jpg';
+        return 'assets/octopus_1440.jpg';
       }
     case DateTime.february:
       {
-        return 'assets/ladybugs.jpg';
+        return 'assets/ladybugs_1440.jpg';
       }
     case 3:
       {
-        return 'assets/flower.jpg';
+        return 'assets/flower_1440.jpg';
       }
     case 4:
       {
-        return 'assets/fantasy.jpg';
+        return 'assets/fantasy_1440.jpg';
       }
     case 5:
       {
-        return 'assets/feather.jpg';
+        return 'assets/feather_1440.jpg';
       }
     case 6:
       {
@@ -267,31 +267,31 @@ monthlybackground(value) {
       }
     case 7:
       {
-        return 'assets/ape.jpg';
+        return 'assets/ape_1440.jpg';
       }
     case 8:
       {
-        return 'assets/fly.jpg';
+        return 'assets/fly_1440.jpg';
       }
     case 9:
       {
-        return 'assets/lumber.jpg';
+        return 'assets/lumber_1440.jpg';
       }
     case 10:
       {
-        return 'assets/spider.jpg';
+        return 'assets/spider_1440.jpg';
       }
     case 11:
       {
-        return 'assets/drop.jpg';
+        return 'assets/drop_1440.jpg';
       }
     case 12:
       {
-        return 'assets/abstract.jpg';
+        return 'assets/abstract_1440.jpg';
       }
     default:
       {
-        return 'assets/coronavirus-4952102.jpg';
+        return 'assets/bee.jpg';
       }
   }
 }
@@ -300,55 +300,112 @@ monthlymessage(value) {
   switch (value) {
     case DateTime.january:
       {
-        return 'Por la transición del Homo sapiens al Homini naturae';
+        return 'Be duces congnitionis et observantiae.';
       }
     case DateTime.february:
       {
-        return 'Nada en la naturaleza vive para sí mismo, vivir para el otro es la regla de la naturaleza';
+        return 'Nada en la naturaleza vive para sí mismo, vivir para el otro es la regla de la naturaleza.';
       }
-    case 3:
+    case DateTime.march:
       {
-        return 'Resiliencia de frente al cambio';
+        return 'Resiliencia de frente al cambio.';
       }
-    case 4:
-      {
-        return 'Todo en la naturaleza está vivo e influye en tus pensamientos';
-      }
-    case 5:
-      {
-        return 'Be duces congnitionis et observantiae';
-      }
-    case 6:
-      {
-        return 'En el interior de la naturaleza habita la verdad';
-      }
-    case 7:
-      {
-        return 'Por el trabajo a favor del ejercicio profesional de las ciencias biológicas';
-      }
-    case 8:
-      {
-        return 'Si permaneces cerca de la naturaleza, inesperadamente puede volverse grandiosa e inconmensurable';
-      }
-    case 9:
-      {
-        return 'Por la armonía entre Sociedad y Naturaleza';
-      }
-    case 10:
+    case DateTime.april:
       {
         return 'Evitemos la sexta extinción masiva; con nuestros conocimientos, fortaleza y unión podemos lograr el cambio.';
       }
-    case 11:
+    case DateTime.may:
+      {
+        return 'Todo en la naturaleza está vivo e influye en tus pensamientos.';
+      }
+    case DateTime.june:
       {
         return 'Una hoja solitaria baila en la brisa, testimonio de la libertad de la naturaleza';
       }
-    case 12:
+    case DateTime.july:
+      {
+        return 'En el interior de la naturaleza habita la verdad.';
+      }
+    case DateTime.august:
+      {
+        return 'Uso sustentable y conservación es nuestra misión.';
+      }
+    case DateTime.september:
+      {
+        return 'Por el trabajo a favor del ejercicio profesional de las ciencias biológicas.';
+      }
+    case DateTime.october:
+      {
+        return 'Si permaneces cerca de la naturaleza, inesperadamente puede volverse grandiosa e inconmensurable';
+      }
+    case DateTime.november:
+      {
+        return 'Por la armonía entre Sociedad y Naturaleza.';
+      }
+    case DateTime.december:
       {
         return 'Cuando observas el cielo nocturno, no eres tú viendo el universo, sino el universo viéndose a sí mismo en forma humana';
       }
     default:
       {
         return 'Todo en la naturaleza está vivo e influye en tus pensamientos, te des cuenta o no. ¿Quién puede decir que la roca no escucha tus pensamientos? ¿O el río? ¿O las cadenas montañosas? Todos pertenecemos a este mundo viviente y no hay nada que no sea parte de él';
+      }
+  }
+}
+
+monthlylogo(value) {
+  switch (value) {
+    case DateTime.january:
+      {
+        return 'assets/logos/Logo aguascalientes.png';
+      }
+    case DateTime.february:
+      {
+        return 'assets/logos/Logotipo CBBC.png';
+      }
+    case DateTime.march:
+      {
+        return 'assets/logos/LOGO chihuahua.png';
+      }
+    case DateTime.april:
+      {
+        return 'assets/logos/logo coahuila.png';
+      }
+    case DateTime.may:
+      {
+        return 'assets/logos/Logo durango.png';
+      }
+    case DateTime.june:
+      {
+        return 'assets/logos/logo guerrero.png';
+      }
+    case DateTime.july:
+      {
+        return 'assets/logos/logo Jalisco.png';
+      }
+    case DateTime.august:
+      {
+        return 'assets/logos/logo edomex.png';
+      }
+    case DateTime.september:
+      {
+        return 'assets/logos/Logo morelos.png';
+      }
+    case DateTime.october:
+      {
+        return 'assets/logos/logo Nuevo leon.png';
+      }
+    case DateTime.november:
+      {
+        return 'assets/logos/LOGO CBQROO.png';
+      }
+    case DateTime.december:
+      {
+        return 'assets/logos/LOGO CBZ.png';
+      }
+    default:
+      {
+        return 'assets/coronavirus-4952102.jpg';
       }
   }
 }
