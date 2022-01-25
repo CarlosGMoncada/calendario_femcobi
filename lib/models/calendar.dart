@@ -89,6 +89,7 @@ class _TableEventsExampleState extends State<MyHomePage> {
       body: Column(
         children: [
           TableCalendar<Event>(
+            locale: 'es_MX',
             firstDay: DateTime.utc(2022, 1, 1),
             lastDay: DateTime.utc(2022, 12, 31),
             focusedDay: _focusedDay,
@@ -131,12 +132,10 @@ class _TableEventsExampleState extends State<MyHomePage> {
             child: Stack(
               children: [
                 Container(
-                  height: double.infinity,
-                  width: 500,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(monthlybackground(imageindex)),
-                      fit: BoxFit.fitHeight,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
@@ -157,13 +156,73 @@ class _TableEventsExampleState extends State<MyHomePage> {
                           ),
                           child: ListTile(
                             onTap: () => print('${value[index]}'),
-                            title: Text('${value[index]}'),
+                            title: Stack(
+                              children: <Widget>[
+                                // Stroked text as border.
+                                Text(
+                                  '${value[index]}',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    foreground: Paint()
+                                      ..style = PaintingStyle.stroke
+                                      ..strokeWidth = 3
+                                      ..color = Colors.black,
+                                  ),
+                                ),
+                                // Solid text as fill.
+                                Text(
+                                  '${value[index]}',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.grey[300],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },
                     );
                   },
                 ),
+                Align(
+                    alignment: Alignment.bottomRight,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.30,
+                      height: MediaQuery.of(context).size.height * 0.15,
+                      child: Stack(
+                        children: [
+                          ShaderMask(
+                            shaderCallback: (bounds) {
+                              return const RadialGradient(
+                                center: Alignment.center,
+                                radius: 0.4,
+                                colors: [
+                                  Colors.black,
+                                  Color(0xaaffffff),
+                                  Colors.transparent
+                                ],
+                              ).createShader(bounds);
+                            },
+                            blendMode: BlendMode.dstIn,
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                color: Color(0xffffffff),
+                              ),
+                            ),
+                          ),
+                          Center(
+                              child: Padding(
+                            padding: EdgeInsets.all(17.0),
+                            child: Image(
+                              image: AssetImage(
+                                monthlylogo(imageindex),
+                              ),
+                            ),
+                          ))
+                        ],
+                      ),
+                    )),
               ],
             ),
           ),
