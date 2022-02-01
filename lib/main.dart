@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
     // final theme = ThemeData.light();
     return MaterialApp(
       title: 'Calendario 2022',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.green),
       home: const FirstRoute(),
     );

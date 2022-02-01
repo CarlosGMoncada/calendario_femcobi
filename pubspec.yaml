@@ -31,9 +31,17 @@ dependencies:
   table_calendar: ^3.0.3
 
 dev_dependencies:
+  flutter_launcher_icons:
+
   flutter_test:
     sdk: flutter
   flutter_lints: 1.0.4
+
+flutter_icons:
+  image_path_ios: 'assets/icon_FEMCOBI-01.png'
+  image_path_android: 'assets/icon_FEMCOBI-01.png'
+  ios: true
+  android: false
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
