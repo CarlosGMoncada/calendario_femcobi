@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../utils.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -19,6 +20,8 @@ class _TableEventsExampleState extends State<MyHomePage> {
   DateTime? _rangeEnd;
   int? imageindex;
 
+  TextEditingController _eventController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -29,7 +32,7 @@ class _TableEventsExampleState extends State<MyHomePage> {
 
   @override
   void dispose() {
-    _selectedEvents.dispose();
+    _eventController.dispose();
     super.dispose();
   }
 
@@ -228,6 +231,45 @@ class _TableEventsExampleState extends State<MyHomePage> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: const Text("Agregar evento"),
+                  content: TextFormField(controller: _eventController),
+                  actions: [
+                    TextButton(
+                      child: const Text("Ok"),
+                      onPressed: () {
+                        if (_eventController.text.isEmpty) {
+                          // Navigator.pop(context);
+                          // return;
+                        } else {
+                          if (kEvents[_selectedDay] != null) {
+                            kEvents[_selectedDay]!.add(
+                              Event(_eventController.text),
+                            );
+                          } else {
+                            kEvents[_selectedDay!] = [
+                              Event(_eventController.text)
+                            ];
+                          }
+                        }
+                        Navigator.pop(context);
+                        _eventController.clear();
+                        setState(() {});
+                        return;
+                      },
+                    ),
+                    TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text("Cancelar"))
+                  ],
+                )),
+        label: const Text("agregar evento"),
+        icon: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 }
