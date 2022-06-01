@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.calendario_femcobi">
    <application
-        android:label="calendario_femcobi"
+        android:label="Calendario FEMCOBI 2022"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

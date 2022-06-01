@@ -20,7 +20,7 @@ class Event {
 /// Using a [LinkedHashMap] is highly recommended if you decide to use a map.
 
 Map<DateTime, List<Event>> bioevents = {
-  DateTime.utc(2022, 1, 6): [
+  DateTime.utc(2022, 1, 6, 10, 0): [
     const Event('Día de los Santos Reyes'),
     // const Event('cumple de Vero')
   ],
