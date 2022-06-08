@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils.dart';
+import 'dart:convert';
+import 'dart:collection';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -11,6 +13,8 @@ class MyHomePage extends StatefulWidget {
 
 class _TableEventsExampleState extends State<MyHomePage> {
   late final ValueNotifier<List<Event>> _selectedEvents;
+  late Map<DateTime, List<Event>> _userEvents;
+  late LinkedHashMap<DateTime, List<Event>> allEvents;
   CalendarFormat _calendarFormat = CalendarFormat.month;
   RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
       .toggledOff; // Can be toggled on/off by longpressing a date
@@ -19,15 +23,21 @@ class _TableEventsExampleState extends State<MyHomePage> {
   DateTime? _rangeStart;
   DateTime? _rangeEnd;
   int? imageindex;
+  late SharedPreferences prefs;
 
   TextEditingController _eventController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    _eventController = TextEditingController();
     _selectedDay = _focusedDay;
-    _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
     imageindex = _focusedDay.month;
+    prefsData();
+    _userEvents = {};
+    allEvents = kEvents..addAll(_userEvents);
+    _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
+    print(allEvents);
   }
 
   @override
@@ -36,9 +46,33 @@ class _TableEventsExampleState extends State<MyHomePage> {
     super.dispose();
   }
 
+  prefsData() async {
+    prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _userEvents = Map<DateTime, List<Event>>.from(
+          decodeMap(json.decode(prefs.getString("events") ?? "{}")));
+    });
+  }
+
+  Map<String, dynamic> encodeMap(Map<DateTime, List<Event>> map) {
+    Map<String, dynamic> newMap = {};
+    map.forEach((key, value) {
+      newMap[key.toString()] = map[key];
+    });
+    return newMap;
+  }
+
+  Map<DateTime, List<Event>?> decodeMap(Map<String, dynamic> map) {
+    Map<DateTime, List<Event>?> newMap = {};
+    map.forEach((key, value) {
+      newMap[DateTime.parse(key)] = map[key];
+    });
+    return newMap;
+  }
+
   List<Event> _getEventsForDay(DateTime day) {
     // Implementation example
-    return kEvents[day] ?? [];
+    return allEvents[day] ?? [];
   }
 
   List<Event> _getEventsForRange(DateTime start, DateTime end) {
@@ -87,7 +121,7 @@ class _TableEventsExampleState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Calendario FEMCOBI 2022'),
+        title: const Text('Calendario FEMCOBI 2022'),
       ),
       body: Column(
         children: [
@@ -103,7 +137,7 @@ class _TableEventsExampleState extends State<MyHomePage> {
             rangeSelectionMode: _rangeSelectionMode,
             eventLoader: _getEventsForDay,
             startingDayOfWeek: StartingDayOfWeek.monday,
-            calendarStyle: CalendarStyle(
+            calendarStyle: const CalendarStyle(
               // Use `CalendarStyle` to customize the UI
               outsideDaysVisible: false,
             ),
@@ -124,11 +158,11 @@ class _TableEventsExampleState extends State<MyHomePage> {
             },
           ),
           Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Text(
               monthlymessage(imageindex),
               textAlign: TextAlign.left,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           Expanded(
@@ -216,7 +250,7 @@ class _TableEventsExampleState extends State<MyHomePage> {
                           ),
                           Center(
                               child: Padding(
-                            padding: EdgeInsets.all(17.0),
+                            padding: const EdgeInsets.all(17.0),
                             child: Image(
                               image: AssetImage(
                                 monthlylogo(imageindex),
@@ -242,22 +276,25 @@ class _TableEventsExampleState extends State<MyHomePage> {
                       child: const Text("Ok"),
                       onPressed: () {
                         if (_eventController.text.isEmpty) {
-                          // Navigator.pop(context);
-                          // return;
-                        } else {
-                          if (kEvents[_selectedDay] != null) {
-                            kEvents[_selectedDay]!.add(
-                              Event(_eventController.text),
-                            );
+                          print("no hay nada");
+                          return;
+                        }
+                        setState(() {
+                          if (_userEvents[_selectedDay] != null) {
+                            _userEvents[_selectedDay]!
+                                .add(Event(_eventController.text));
                           } else {
-                            kEvents[_selectedDay!] = [
+                            _userEvents[_selectedDay!] = [
                               Event(_eventController.text)
                             ];
                           }
-                        }
-                        Navigator.pop(context);
-                        _eventController.clear();
+                          prefs.setString(
+                              "events", jsonEncode(encodeMap(_userEvents)));
+                          _eventController.clear();
+                          /* setState(() {}); */
+                        });
                         setState(() {});
+                        Navigator.pop(context);
                         return;
                       },
                     ),

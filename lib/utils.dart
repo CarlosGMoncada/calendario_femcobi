@@ -11,6 +11,10 @@ class Event {
 
   const Event(this.title);
 
+  Set<String> toJson() => {
+        title,
+      };
+
   @override
   String toString() => title;
 }
